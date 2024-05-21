@@ -16,6 +16,8 @@ abstract class AuthenticationRemoteDataSource {
   Future<void> logout();
 
   Future<User?> googleSignIn();
+
+  Future<User?> phoneNumberSignIn(String params);
 }
 
 class AuthenticationRemoteDataSourceImpl
@@ -59,6 +61,13 @@ class AuthenticationRemoteDataSourceImpl
   Future<User?> googleSignIn() async {
     consoleLog(">>>>>>>>>>>");
     final response = await firebaseAuthClient.signInWithGoogle();
+    return response;
+  }
+
+  @override
+  Future<User?> phoneNumberSignIn(String params) async {
+    consoleLog(">>>>>>>>>>>");
+    final response = await firebaseAuthClient.phoneNumberSignIn(params);
     return response;
   }
 }

@@ -19,4 +19,6 @@ abstract class AuthenticationRepository {
   Future<Either<AppError, void>> logout();
 
   Future<Either<AppError, User?>> googleSignIn();
+
+  Future<Either<AppError, User?>> phoneNumberSignIn(String params);
 }

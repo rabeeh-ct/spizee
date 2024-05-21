@@ -87,4 +87,30 @@ class FirebaseAuthClient{
     }
     return user;
   }
+
+  Future<User?> phoneNumberSignIn(String params) async {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    await auth.signInWithPhoneNumber(params);
+    return null;
+    // User? user;
+    //
+    // await auth.verifyPhoneNumber(
+    //   phoneNumber: params,
+    //   verificationCompleted: (PhoneAuthCredential credential) async {
+    //     // ANDROID ONLY!
+    //
+    //     // Sign the user in (or link) with the auto-generated credential
+    //    final  data = await auth.signInWithCredential(credential);
+    //    user= data.user;
+    //   },
+    //   verificationFailed: (FirebaseAuthException e) {
+    //     if (e.code == 'invalid-phone-number') {
+    //       consoleLog('The provided phone number is not valid.');
+    //     }
+    //   },
+    //   codeSent: (String verificationId, int? resendToken) {},
+    //   codeAutoRetrievalTimeout: (String verificationId) {},
+    // );
+    // return user;
+  }
 }

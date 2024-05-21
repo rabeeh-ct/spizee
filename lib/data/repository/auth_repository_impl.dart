@@ -125,4 +125,18 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
       return Left(AppError(AppErrorType.api));
     }
   }
+
+  @override
+  Future<Either<AppError, User?>> phoneNumberSignIn(String params) async {
+    try {
+      final response = await authenticationRemoteDataSource.phoneNumberSignIn(params);
+      return Right(response);
+    } on UnauthorizedException {
+      return Left(AppError(AppErrorType.unauthorised));
+    } on SocketException {
+      return Left(AppError(AppErrorType.network));
+    } on Exception {
+      return Left(AppError(AppErrorType.api));
+    }
+  }
 }
