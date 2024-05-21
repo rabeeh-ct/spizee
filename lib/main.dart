@@ -19,9 +19,9 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Spizee',
       debugShowCheckedModeBanner: false,
-      themeMode: themeMode,
-      theme: themeData(context),
-      darkTheme: themeDataDark(context),
+      themeMode: ThemeMode.light,
+      theme: ThemeData(useMaterial3: true),
+      // theme: themeData(context),
       initialRoute: RouteList.initial,
       routes: Routes.routes,
     );

@@ -28,9 +28,10 @@ const greyColor = Color(0xff959595);
 const primaryColor = Color(0xFF17A803);
 const errorColor = Color(0xFFFC4444);
 const blackColor = Color(0xff000000);
-const greenColor = Color(0xff4BB543);
+const greenColor = Color(0xff4aa850);
+const lightGreenColor = Color(0xff8ad262);
+const darkGreenColor = Color(0xff183c0e);
 const warningColor = Color(0xFFFF640D);
-// const offWhite = Color(0xffCED2D6);
 
 const darkGrey = Color(0xff343C42);
 const lightColor = Color(0xffC3C0C3);
@@ -125,7 +126,7 @@ ThemeData themeData(context) {
         secondarySelectedColor: primaryColor),
     appBarTheme: const AppBarTheme(
         color: whiteColor,
-        elevation: 0,
+        elevation: 4,
         iconTheme: IconThemeData(color: blackColor)),
     colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.white),
     elevatedButtonTheme: ElevatedButtonThemeData(
@@ -140,94 +141,6 @@ ThemeData themeData(context) {
     checkboxTheme: const CheckboxThemeData(fillColor: MaterialStatePropertyAll(blackColor),),
     radioTheme: const RadioThemeData(
       fillColor: MaterialStatePropertyAll(blackColor),
-    ),
-  );
-}
-
-ThemeData themeDataDark(context) {
-  return ThemeData.dark().copyWith(
-    colorScheme: const ColorScheme.dark(secondary: darkGrey,primary: Colors.blue,),
-    scaffoldBackgroundColor: darkBackground,
-    // // androidOverscrollIndicator: AndroidOverscrollIndicator.stretch,
-    // // platform: TargetPlatform.android,
-    iconTheme: const IconThemeData(color: whiteColor),
-    cardTheme: CardTheme(
-        color: darkGrey,
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(defaultPadding * .5))),
-    popupMenuTheme: const PopupMenuThemeData(textStyle: TextStyle(fontSize: 13)),
-    // tabBarTheme: TabBarTheme(
-    //     labelStyle: Theme.of(context).textTheme.titleLarge,
-    //     labelColor: blackColor,
-    //     indicator: const UnderlineTabIndicator(
-    //         insets: EdgeInsets.symmetric(horizontal: defaultPadding * 3),
-    //         borderSide: BorderSide(color: primaryColor))),
-    // textSelectionTheme: const TextSelectionThemeData(cursorColor: primaryColor),
-    inputDecorationTheme: InputDecorationTheme(
-      contentPadding: const EdgeInsets.symmetric(
-          horizontal: defaultPadding / 2, vertical: defaultPadding * .8),
-      fillColor: darkGrey,
-      filled: true,
-      iconColor: primaryColor,
-      labelStyle: const TextStyle(color: greyColor),
-      hintStyle: const TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
-      focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(defaultPadding / 2),
-          borderSide: const BorderSide(color: primaryColor)),
-      border: OutlineInputBorder(
-          borderSide: const BorderSide(width: 0, style: BorderStyle.none),
-          borderRadius: BorderRadius.circular(defaultPadding / 2)),
-    ),
-    elevatedButtonTheme: ElevatedButtonThemeData(
-      style: TextButton.styleFrom(
-        backgroundColor: darkGrey,
-        shape: RoundedRectangleBorder(
-          side: const BorderSide(color: darkGrey, width: 1.5),
-          borderRadius: BorderRadius.circular(defaultPadding * .5),
-        ),
-      ),
-    ),
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        backgroundColor: darkGrey,
-        selectedIconTheme: const IconThemeData(
-          color: primaryColor,
-          size: 28,
-        ),
-        unselectedIconTheme: const IconThemeData(color: Colors.white70),
-        // selectedIconTheme: IconThemeData(color: whiteColor),
-        unselectedItemColor: whiteColor.withOpacity(.75),
-        // unselectedFontSize: 14,
-        // backgroundColor: whiteColor,
-        showUnselectedLabels: true,
-        selectedItemColor: primaryColor,
-        // unselectedItemColor: Colors.white70,
-        unselectedLabelStyle: Theme.of(context)
-            .textTheme
-            .labelSmall
-            ?.copyWith(inherit: true, letterSpacing: 0),
-        selectedLabelStyle: Theme.of(context)
-            .textTheme
-            .labelMedium
-            ?.copyWith(inherit: true, color: primaryColor)),
-    // textTheme: GoogleFonts.interTextTheme(getTextTheme(context)),
-    // chipTheme: Theme.of(context).chipTheme.copyWith(
-    //     secondaryLabelStyle: const TextStyle(color: whiteColor),
-    //     secondarySelectedColor: primaryColor),
-    appBarTheme: const AppBarTheme(
-      color: darkGrey,
-      elevation: 0,
-      iconTheme: IconThemeData(color: whiteColor),
-      actionsIconTheme: IconThemeData(color: whiteColor),
-    ),
-    // colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.white),
-    chipTheme: const ChipThemeData(
-      backgroundColor: darkGrey,
-      selectedColor: darkGrey,
-      disabledColor: darkGrey,
-      // surfaceTintColor: darkGrey,
-    ),
-    radioTheme: const RadioThemeData(
-      fillColor: MaterialStatePropertyAll(whiteColor),
     ),
   );
 }
