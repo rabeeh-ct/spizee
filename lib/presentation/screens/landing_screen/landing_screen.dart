@@ -28,7 +28,8 @@ class LandingScreen extends StatelessWidget {
             LandingPageButton(
               backgroundColor: Colors.blue.shade600,
               onClick: () {
-                Get.toNamed(RouteList.homeScreen);
+                screenController.googleSignIn();
+                // Get.toNamed(RouteList.homeScreen);
               },
               svgPath: "assets/images/google.svg",
               text: "Google",

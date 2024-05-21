@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
 import '../../utils/debug_utils.dart';
@@ -6,13 +7,15 @@ import '../core/api_client.dart';
 import '../core/firebase_auth_client.dart';
 import '../core/firebase_client.dart';
 import '../models/user_model.dart';
-//
+
 abstract class AuthenticationRemoteDataSource {
   Future<UserModel> login(Map<String, dynamic> params);
 
   Future<UserModel> register(Map<String, dynamic> params);
-//
+
   Future<void> logout();
+
+  Future<User?> googleSignIn();
 }
 
 class AuthenticationRemoteDataSourceImpl
@@ -49,6 +52,13 @@ class AuthenticationRemoteDataSourceImpl
   @override
   Future<void> logout() async {
     final response = await firebaseAuthClient.logout();
+    return response;
+  }
+
+  @override
+  Future<User?> googleSignIn() async {
+    consoleLog(">>>>>>>>>>>");
+    final response = await firebaseAuthClient.signInWithGoogle();
     return response;
   }
 }

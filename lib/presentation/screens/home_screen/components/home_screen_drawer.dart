@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:spizee/presentation/screens/landing_screen/landing_screen_controller.dart';
 
 import '../../../theme/theme.dart';
 
@@ -56,7 +57,9 @@ class HomeScreenDrawer extends StatelessWidget {
                     Icons.logout,
                     color: Colors.grey,
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Get.put(LandingScreenController()).logOut(isNavigate: true);
+                  },
                   title: const Text(
                     "Log out",
                     style: TextStyle(color: greyColor, fontWeight: FontWeight.w600),

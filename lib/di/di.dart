@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 
 import '../data/core/api_client.dart';
+import '../data/core/firebase_auth_client.dart';
+import '../data/core/firebase_client.dart';
 import '../data/data_sources/auth_local_data_source.dart';
 import '../data/data_sources/auth_remote_data_source.dart';
 import '../data/data_sources/remote_data_source.dart';
@@ -21,6 +23,8 @@ class DependencyInjection {
         fenix: true);
     Get.lazyPut<DataRepository>(() => DataRepositoryImpl(), fenix: true);
     Get.lazyPut<RemoteDataSource>(() => RemoteDataSourceImpl(), fenix: true);
+    Get.lazyPut(() => FirebaseAuthClient(), fenix: true);
+    Get.lazyPut(() => FirebaseClient(), fenix: true);
 
   }
 }

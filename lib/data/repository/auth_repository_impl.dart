@@ -111,4 +111,18 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
       return Left(AppError(AppErrorType.api));
     }
   }
+
+  @override
+  Future<Either<AppError, User?>> googleSignIn() async {
+    try {
+      final response = await authenticationRemoteDataSource.googleSignIn();
+      return Right(response);
+    } on UnauthorizedException {
+      return Left(AppError(AppErrorType.unauthorised));
+    } on SocketException {
+      return Left(AppError(AppErrorType.network));
+    } on Exception {
+      return Left(AppError(AppErrorType.api));
+    }
+  }
 }

@@ -17,4 +17,6 @@ abstract class AuthenticationRepository {
   Future<Either<AppError, void>> saveUserLocal(UserEntity params);
 
   Future<Either<AppError, void>> logout();
+
+  Future<Either<AppError, User?>> googleSignIn();
 }

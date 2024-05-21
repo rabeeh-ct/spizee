@@ -45,6 +45,7 @@ dependencies:
   firebase_auth: ^4.19.5 # for firebase authentication
   cloud_firestore: ^4.17.3 # for saving data to firestore
   get_storage: ^2.1.1 # for saving data locally
+  google_sign_in: ^6.2.1
 
 dev_dependencies:
   flutter_test:

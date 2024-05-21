@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "703622540021",
+    "project_id": "spizee-8a567",
+    "storage_bucket": "spizee-8a567.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:703622540021:android:2c2a999dfdee936296f3bc",
+        "android_client_info": {
+          "package_name": "com.example.spizee"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "703622540021-1hh943klkava2a1sprt4b5tbnah8v2i4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.spizee",
+            "certificate_hash": "8af795d8a1608e07e744827690ecbf4a579ef0d7"
+          }
+        },
+        {
+          "client_id": "703622540021-qvt1rs86vm89kgmg4spq6i4tbbtduv3i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0cWMnW9gwGgmpvhUOleNH98xCcMqSK5w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "703622540021-qvt1rs86vm89kgmg4spq6i4tbbtduv3i.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "703622540021-9to828ukann7hnj2nubkjed55032gmmo.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.spizee"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
