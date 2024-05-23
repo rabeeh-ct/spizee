@@ -29,38 +29,15 @@ String formatDuration(DateTime date) {
 }
 
 String stringTimeFormat(String time, {String? local}) {
-  // List<String> times = time.split(":");
-  // List<int> timesInt = times.map(int.parse).toList();
-  // String formattedTime = "";
-  // if (timesInt[0] < 12) {
-  //   formattedTime = "${timesInt[0]}.${times[1]} AM";
-  // } else if (timesInt[0] == 12) {
-  //   if (timesInt[1] == 0) {
-  //     formattedTime = "${timesInt[0]}.${times[1]} PM";
-  //   } else {
-  //     formattedTime = "${timesInt[0]}.${times[1]} PM";
-  //   }
-  // } else {
-  //   formattedTime = "${timesInt[0] - 12}.${times[1]} PM";
-  // }
   return DateFormat.jm(local).format(DateFormat("hh:mm:ss").parse(time));
 }
+
 TimeOfDay convertToTimeOfDay(String timeString) {
   List<String> parts = timeString.split(':');
   int hour = int.parse(parts[0]);
   int minute = int.parse(parts[1]);
   return TimeOfDay(hour: hour, minute: minute);
 }
-// String formatRelativeDate(DateTime date) {
-//   RelativeDateFormat relativeDateFormat = RelativeDateFormat(
-//     locale: Intl.defaultLocale,
-//     // configure the cutoff threshold for displaying the relative date format
-//     dayThreshold: 3,
-//     // configure the date style
-//     style: DateStyle.Compact,
-//   );
-//   return relativeDateFormat.format(date);
-// }
 
 String firstLetterCapital(String str){
   return str[0].toUpperCase()+str.replaceRange(0, 1, "").toLowerCase();

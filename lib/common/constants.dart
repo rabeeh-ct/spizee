@@ -5,4 +5,3 @@ const String unauthorisedError = "Unauthorised Exception";
 const String sessionDeniedError = "Session Denied,please login to continue";
 const String firebaseError = "Firebase Error Occurred";
 const String currency = "INR";
-// const String selectGender = ;

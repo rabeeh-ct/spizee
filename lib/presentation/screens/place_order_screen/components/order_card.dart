@@ -1,21 +1,23 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:spizee/presentation/theme/theme.dart';
 
 import '../../../../common/constants.dart';
+import '../../../../domain/entities/home_screen_entity.dart';
 import '../../home_screen/components/quantity_change_button.dart';
+import '../place_order_screen_controller.dart';
 
 class OrderCard extends StatelessWidget {
-  const OrderCard({super.key});
+  const OrderCard({super.key, required this.categoryDish});
+  final Rx<CategoryDish> categoryDish;
 
   @override
   Widget build(BuildContext context) {
+    final PlaceOrderScreenController screenController = Get.find();
     return Card(
       elevation: 0,
       color: Colors.transparent,
-      // color: Get.theme.scaffoldBackgroundColor,
-      // width: double.maxFinite,
-      // height: 100,
-      // color: Colors.red,
       margin: EdgeInsets.zero,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -37,23 +39,23 @@ class OrderCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    "The standard chunk of Lorem Ipsum used since the",
+                  Text(
+                    categoryDish.value.dishName,
                     // maxLines: 2,
-                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600
+                    style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600
                       // overflow: TextOverflow.ellipsis,
                     ),
                   ),
                   5.sBH,
                   Text(
-                    "$currency ${(5).toStringAsFixed(2)}",
+                    "$currency ${(categoryDish.value.dishPrice).toStringAsFixed(2)}",
                     style: const TextStyle(
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  const Text(
-                    "15 Calories",
-                    style: TextStyle(
+                  Text(
+                    "${categoryDish.value.dishCalories.toInt()} Calories",
+                    style: const TextStyle(
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -62,19 +64,24 @@ class OrderCard extends StatelessWidget {
               ),
             ),
           ),
-          //todo
-          // QuantityChangeButton(
-          //
-          //   addButton: () {},
-          //   removeButton: () {},
-          //   buttonColor: darkGreenColor,
-          // ),
+          QuantityChangeButton(
+            categoryDishes: screenController.cartItems,
+            categoryDish: categoryDish,
+            buttonColor: darkGreenColor,
+          ),
           5.sBW,
-          Text(
-            "$currency ${(5).toStringAsFixed(2)}",
-            style: const TextStyle(
-              fontWeight: FontWeight.w500,
-            ),
+          Obx(() {
+              return SizedBox(
+                // color: Colors.red,
+                width: 80,
+                child: Text(
+                  "$currency ${(categoryDish.value.dishPrice*categoryDish.value.cartCount).toStringAsFixed(2)}",
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              );
+            }
           ),
 
         ],

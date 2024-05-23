@@ -26,21 +26,4 @@ class DataRepositoryImpl implements DataRepository {
     }
   }
 
-/*
-  @override
-  Future<Either<AppError, Entity>> fn(
-      Map<String, dynamic> params) async {
-    try {
-      final response = await remoteDataSource.fn(params);
-      return Right(response);
-    } on UnauthorizedException {
-      return Left(AppError(AppErrorType.unauthorised));
-    } on SocketException {
-      return Left(AppError(AppErrorType.network));
-    } on Exception {
-      return Left(AppError(AppErrorType.api));
-    }
-  }
- */
-
 }

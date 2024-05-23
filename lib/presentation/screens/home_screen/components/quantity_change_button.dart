@@ -8,16 +8,13 @@ import '../../../theme/theme.dart';
 class QuantityChangeButton extends StatelessWidget {
   const QuantityChangeButton({
     super.key,
-    required this.removeButton,
-    required this.addButton,
     this.buttonColor,
-    required this.categoryDish,
+    required this.categoryDish, this.categoryDishes,
   });
 
-  final VoidCallback removeButton;
-  final VoidCallback addButton;
   final Color? buttonColor;
   final Rx<CategoryDish> categoryDish;
+  final RxList<CategoryDish>? categoryDishes;
 
   @override
   Widget build(BuildContext context) {
@@ -34,10 +31,12 @@ class QuantityChangeButton extends StatelessWidget {
           Expanded(
             child: InkWell(
               onTap: () {
+                // screenController.dishItems[categoryDish.value]=screenController.dishItems[categoryDish.value]=(screenController.dishItems[categoryDish.value]!-1);
                 if(categoryDish.value.cartCount>0){
                   categoryDish.value.cartCount--;
                   categoryDish.refresh();
                   screenController.changeCartCount(isAdd: false);
+                  categoryDishes?.refresh();
                 }
               },
               child: const Icon(
@@ -65,6 +64,7 @@ class QuantityChangeButton extends StatelessWidget {
                 categoryDish.value.cartCount++;
                 categoryDish.refresh();
                 screenController.changeCartCount(isAdd: true);
+                categoryDishes?.refresh();
               },
               child: const Icon(
                 Icons.add,

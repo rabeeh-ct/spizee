@@ -13,14 +13,15 @@ class VerifyOtpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final VerifyOtpScreenController screenController = Get.put(VerifyOtpScreenController());
     return Scaffold(
-      body: SizedBox(
-        width: MediaQuery.of(context).size.width,
-        child: Padding(
+      appBar: AppBar(),
+      body: SingleChildScrollView(
+        // width: MediaQuery.of(context).size.width,
           padding: const EdgeInsets.all(defaultPadding),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              (Get.height*.15).sBH,
               SvgPicture.asset(
                 "assets/images/phone_verify.svg",
               ),
@@ -78,7 +79,6 @@ class VerifyOtpScreen extends StatelessWidget {
             ],
           ),
         ),
-      ),
     );
   }
 }

@@ -1,23 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:spizee/domain/usecases/phone_number_verify_usecase.dart';
-import 'package:spizee/presentation/routes/route_constants.dart';
 import 'package:spizee/utils/debug_utils.dart';
 
-import '../../../utils/snackbar_utils.dart';
-import '../home_screen/home_screen_controller.dart';
+import '../../../domain/usecases/phone_number_verify_usecase.dart';
+import '../../routes/route_constants.dart';
 
 class VerifyOtpScreenController extends GetxController {
   VerifyOtpScreenArgs verifyOtpScreenArgs = Get.arguments;
   final TextEditingController otpTextController = TextEditingController();
   final GlobalKey<FormState> otpFormKey = GlobalKey<FormState>(debugLabel: "otpFormKey");
 
-  // getData() {
-  // }
-
   final _phoneNumberSignInUseCase = Get.put(PhoneNumberSignInUseCase());
   RxBool buttonLoading = false.obs;
 
+  // for verify the otp and sign in,
   phoneNumberSignIn() async {
     buttonLoading(true);
     PhoneNumberSignInParams params = PhoneNumberSignInParams(
@@ -29,11 +25,7 @@ class VerifyOtpScreenController extends GetxController {
       if (r != null) {
         consoleLog("user == $r");
         Get.offAllNamed(RouteList.homeScreen);
-        Get.find<HomeScreenController>().getData();
       }
-      // if(isNavigate){
-      //   Get.offAllNamed(RouteList.initial);
-      // }
     });
     buttonLoading(false);
   }

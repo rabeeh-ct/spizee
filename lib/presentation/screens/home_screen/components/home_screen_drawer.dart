@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:spizee/presentation/screens/landing_screen/landing_screen_controller.dart';
@@ -33,16 +34,19 @@ class HomeScreenDrawer extends StatelessWidget {
               children: [
                 const CircleAvatar(
                   radius: 45,
+                  foregroundImage: AssetImage("assets/images/boy.jpg"),
                 ),
                 10.sBH,
-                const Text(
-                  "Name",
-                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+                Text(
+                  FirebaseAuth.instance.currentUser?.displayName ??
+                      FirebaseAuth.instance.currentUser?.phoneNumber ??
+                      "",
+                  style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
                 ),
                 10.sBH,
-                const Text(
-                  "ID 000",
-                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
+                Text(
+                  "ID ${FirebaseAuth.instance.currentUser?.uid}",
+                  style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
                 ),
               ],
             ),

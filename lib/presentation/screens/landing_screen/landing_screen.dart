@@ -18,46 +18,48 @@ class LandingScreen extends StatelessWidget {
       body: SafeArea(
         minimum: const EdgeInsets.symmetric(
             horizontal: defaultPadding, vertical: defaultPadding / 2),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            (Get.width / 4).sBH,
-            Image.asset(
-              "assets/images/firebase_logo.png",
-              width: 200,
-            ),
-            (Get.width / 4).sBH,
-            Obx(() {
-                return LandingPageButton(
-                  backgroundColor: Colors.blue.shade600,
-                  onClick: () {
-                    screenController.googleSignIn();
-                    // Get.toNamed(RouteList.homeScreen);
-                  },
-                  svgPath: "assets/images/google.svg",
-                  text: "Google",
-                  isLoading: screenController.googleButtonLoading.value,
-                );
-              }
-            ),
-            10.sBH,
-            LandingPageButton(
-              gradient: const LinearGradient(
-                begin: AlignmentDirectional.topStart,
-                end: AlignmentDirectional.bottomEnd,
-                colors: [
-                  lightGreenColor,
-                  greenColor,
-                ],
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              (Get.height *.2).sBH,
+              Image.asset(
+                "assets/images/firebase_logo.png",
+                width: 200,
               ),
-              onClick: () {
-                Get.bottomSheet(const PhoneNumberVerifyBottomSheet(),isScrollControlled: true);
-              },
-              svgPath: "assets/images/phone.svg",
-              text: "Phone",
-              isLoading: false,
-            ),
-          ],
+              (Get.height*.1).sBH,
+              Obx(() {
+                  return LandingPageButton(
+                    backgroundColor: Colors.blue.shade600,
+                    onClick: () {
+                      screenController.googleSignIn();
+                      // Get.toNamed(RouteList.homeScreen);
+                    },
+                    svgPath: "assets/images/google.svg",
+                    text: "Google",
+                    isLoading: screenController.googleButtonLoading.value,
+                  );
+                }
+              ),
+              10.sBH,
+              LandingPageButton(
+                gradient: const LinearGradient(
+                  begin: AlignmentDirectional.topStart,
+                  end: AlignmentDirectional.bottomEnd,
+                  colors: [
+                    lightGreenColor,
+                    greenColor,
+                  ],
+                ),
+                onClick: () {
+                  Get.bottomSheet(const PhoneNumberVerifyBottomSheet(),isScrollControlled: true);
+                },
+                svgPath: "assets/images/phone.svg",
+                text: "Phone",
+                isLoading: false,
+              ),
+            ],
+          ),
         ),
       ),
     );

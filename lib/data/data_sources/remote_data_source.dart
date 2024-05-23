@@ -9,7 +9,6 @@ abstract class RemoteDataSource {
 
   Future<List<HomeScreenModel>> getHomeScreenData();
 
-
 }
 
 class RemoteDataSourceImpl implements RemoteDataSource {

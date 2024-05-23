@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:spizee/common/constants.dart';
+import 'package:spizee/presentation/screens/home_screen/components/customization_bottom_sheet.dart';
 import 'package:spizee/presentation/screens/home_screen/components/quantity_change_button.dart';
 import 'package:spizee/presentation/theme/theme.dart';
 
@@ -35,22 +36,19 @@ class ItemCard extends StatelessWidget {
               height: 20,
               padding: const EdgeInsets.all(3),
               child: Container(
-                decoration: const BoxDecoration(
-                    shape: BoxShape.circle, color: greenColor),
+                decoration: const BoxDecoration(shape: BoxShape.circle, color: greenColor),
               ),
             ),
             Expanded(
               flex: 3,
               child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
+                padding: const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       categoryDish.dishName,
-                      style: const TextStyle(
-                          fontSize: 15, fontWeight: FontWeight.w600),
+                      style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
                     ),
                     5.sBH,
                     Row(
@@ -78,14 +76,24 @@ class ItemCard extends StatelessWidget {
                     10.sBH,
                     QuantityChangeButton(
                       categoryDish: categoryDish.obs,
-                      addButton: () {},
-                      removeButton: () {},
                     ),
-                    10.sBH,
+                    5.sBH,
                     if (categoryDish.addonCat.isNotEmpty)
-                      const Text(
-                        'Customizations Available',
-                        style: TextStyle(color: Colors.red),
+                      InkWell(
+                        borderRadius: BorderRadius.circular(30),
+                        onTap: () {
+                          Get.bottomSheet(
+                            CustomizationBottomSheet(addOnCategories: categoryDish.addonCat),
+                            isScrollControlled: true,
+                          );
+                        },
+                        child: const Padding(
+                          padding: EdgeInsets.all(5),
+                          child: Text(
+                            'Customizations Available',
+                            style: TextStyle(color: Colors.red),
+                          ),
+                        ),
                       ),
                   ],
                 ),
@@ -96,11 +104,11 @@ class ItemCard extends StatelessWidget {
                 width: double.maxFinite,
                 height: 100,
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(5),
+                    borderRadius: BorderRadius.circular(5),
                     child: CachedNetworkImage(
-                  imageUrl: categoryDish.dishImage,
-                  fit: BoxFit.cover,
-                )),
+                      imageUrl: categoryDish.dishImage,
+                      fit: BoxFit.cover,
+                    )),
               ),
             ),
           ],

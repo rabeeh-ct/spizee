@@ -1,17 +1,15 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:spizee/domain/entities/app_error.dart';
-import 'package:spizee/domain/usecases/google_sign_in_usecase.dart';
-import 'package:spizee/presentation/screens/verify_otp_screen/verify_otp_screen_controller.dart';
-import 'package:spizee/utils/hide_keyboard.dart';
 
+import '../../../domain/entities/app_error.dart';
 import '../../../domain/params/no_params.dart';
+import '../../../domain/usecases/google_sign_in_usecase.dart';
 import '../../../domain/usecases/logout_usecase.dart';
-import '../../../domain/usecases/phone_number_verify_usecase.dart';
 import '../../../utils/debug_utils.dart';
+import '../../../utils/hide_keyboard.dart';
 import '../../routes/route_constants.dart';
-import '../home_screen/home_screen_controller.dart';
+import '../verify_otp_screen/verify_otp_screen_controller.dart';
 
 class LandingScreenController extends GetxController {
   final TextEditingController phoneController = TextEditingController();
@@ -24,6 +22,7 @@ class LandingScreenController extends GetxController {
   RxBool phoneButtonLoading = false.obs;
   RxBool logOutButtonLoading = false.obs;
 
+  // google sing in function
   googleSignIn() async {
     googleButtonLoading(true);
     // await logOut();
@@ -33,12 +32,13 @@ class LandingScreenController extends GetxController {
       if (r != null) {
         consoleLog(r);
         Get.offAllNamed(RouteList.homeScreen);
-        Get.find<HomeScreenController>().getData();
+        // Get.find<HomeScreenController>().getData();
       } else {}
     });
     googleButtonLoading(false);
   }
 
+  // logout function
   logOut({bool isNavigate = false}) async {
     logOutButtonLoading(true);
     NoParams noParams = const NoParams();
@@ -46,11 +46,13 @@ class LandingScreenController extends GetxController {
     response.fold((l) => l.handleError(), (r) async {
       if (isNavigate) {
         Get.offAllNamed(RouteList.initial);
+        Get.deleteAll();
       }
     });
     logOutButtonLoading(false);
   }
 
+  // phone number verify function, when calling this function otp will sent to the number
   phoneNumberVerify() async {
     phoneButtonLoading(true);
     FirebaseAuth auth = FirebaseAuth.instance;

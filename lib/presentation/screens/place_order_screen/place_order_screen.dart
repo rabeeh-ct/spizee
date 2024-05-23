@@ -12,11 +12,12 @@ class PlaceOrderScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenController = Get.put(PlaceOrderScreenController());
+    final PlaceOrderScreenController screenController = Get.find();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
         shadowColor: Colors.white,
+        surfaceTintColor: whiteColor,
         scrolledUnderElevation: 5,
         title: const Text(
           "Order Summary",
@@ -38,26 +39,34 @@ class PlaceOrderScreen extends StatelessWidget {
                       height: 50,
                       color: darkGreenColor,
                       alignment: Alignment.center,
-                      child: const Text(
-                        "2 Dishes - 2 Items",
-                        style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold,
-                          color: whiteColor,
-                        ),
-                      ),
+                      child: Obx(() {
+                        return Text(
+                          "${screenController.cartItems.length} Dishes - ${screenController.getItemCount(cartItems: screenController.cartItems, isTotalAmount: false).toInt()} Items",
+                          style: const TextStyle(
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold,
+                            color: whiteColor,
+                          ),
+                        );
+                      }),
                     ),
                     Divider(
                       color: blackColor.withOpacity(0.2),
                     ),
                     Expanded(
-                      child: ListView.separated(
-                        itemBuilder: (context, index) => const OrderCard(),
+                      child: screenController.cartItems.isNotEmpty?ListView.separated(
+                        itemBuilder: (context, index) => OrderCard(
+                          categoryDish: screenController.cartItems[index].obs,
+                        ),
                         separatorBuilder: (context, index) => Divider(
                           // height: 2,
                           color: blackColor.withOpacity(0.2),
                         ),
-                        itemCount: 10,
+                        itemCount: screenController.cartItems.length,
+                      ):const Center(
+                        child: Text(
+                          "Your cart is empty"
+                        ),
                       ),
                     ),
                     Divider(
@@ -67,20 +76,22 @@ class PlaceOrderScreen extends StatelessWidget {
                       width: double.maxFinite,
                       height: 50,
                       alignment: Alignment.center,
-                      child: const Row(
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
+                          const Text(
                             "Total Amount",
                             style: TextStyle(
                               fontSize: 17,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          Text("$currency 65.00",style: TextStyle(
-                            fontSize: 15,
-                            color: greenColor
-                          ),),
+                          Obx(() {
+                            return Text(
+                              "$currency ${screenController.getItemCount(cartItems: screenController.cartItems, isTotalAmount: true).toStringAsFixed(2)}",
+                              style: const TextStyle(fontSize: 15, color: greenColor),
+                            );
+                          }),
                         ],
                       ),
                     ),
@@ -88,13 +99,16 @@ class PlaceOrderScreen extends StatelessWidget {
                 ),
               ),
             ),
-            10.sBH,
-            DefaultButton(
-              backgroundColor: darkGreenColor,
-              text: "Place Order",
-              isLoading: false,
-              borderRadius: 30,
-              onPressed: () {},
+            20.sBH,
+            Obx(() {
+                return DefaultButton(
+                  backgroundColor: darkGreenColor,
+                  text: "Place Order",
+                  isLoading: screenController.placeOrderButtonLoading.value,
+                  borderRadius: 30,
+                  onPressed: screenController.placeOrder,
+                );
+              }
             ),
           ],
         ),
