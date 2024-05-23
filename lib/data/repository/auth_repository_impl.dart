@@ -4,6 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/exceptions/exceptions.dart';
+import 'package:spizee/utils/debug_utils.dart';
 
 import '../../domain/entities/app_error.dart';
 import '../../domain/entities/user_entity.dart';
@@ -127,7 +128,7 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
   }
 
   @override
-  Future<Either<AppError, User?>> phoneNumberSignIn(String params) async {
+  Future<Either<AppError, User?>> phoneNumberSignIn(Map<String,dynamic> params) async {
     try {
       final response = await authenticationRemoteDataSource.phoneNumberSignIn(params);
       return Right(response);
@@ -135,7 +136,10 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
       return Left(AppError(AppErrorType.unauthorised));
     } on SocketException {
       return Left(AppError(AppErrorType.network));
-    } on Exception {
+    } on FirebaseAuthException catch(e) {
+      consoleLog(":::::::::::::::::::");
+      return Left(AppError(AppErrorType.firebase,e.message));
+    }on Exception {
       return Left(AppError(AppErrorType.api));
     }
   }

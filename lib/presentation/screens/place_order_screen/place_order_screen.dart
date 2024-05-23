@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:spizee/common/constants.dart';
 import 'package:spizee/presentation/screens/place_order_screen/components/order_card.dart';
 import 'package:spizee/presentation/widgets/default_button.dart';
 
@@ -76,7 +77,7 @@ class PlaceOrderScreen extends StatelessWidget {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          Text("INR 65.00",style: TextStyle(
+                          Text("$currency 65.00",style: TextStyle(
                             fontSize: 15,
                             color: greenColor
                           ),),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:spizee/presentation/routes/route_constants.dart';
 import 'package:spizee/presentation/screens/landing_screen/components/landing_page_button.dart';
+import 'package:spizee/presentation/screens/landing_screen/components/phone_number_verify_bottom_sheet.dart';
 import 'package:spizee/presentation/theme/theme.dart';
 
 import 'landing_screen_controller.dart';
@@ -13,6 +14,7 @@ class LandingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final LandingScreenController screenController = Get.put(LandingScreenController());
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         minimum: const EdgeInsets.symmetric(
             horizontal: defaultPadding, vertical: defaultPadding / 2),
@@ -25,15 +27,18 @@ class LandingScreen extends StatelessWidget {
               width: 200,
             ),
             (Get.width / 4).sBH,
-            LandingPageButton(
-              backgroundColor: Colors.blue.shade600,
-              onClick: () {
-                screenController.googleSignIn();
-                // Get.toNamed(RouteList.homeScreen);
-              },
-              svgPath: "assets/images/google.svg",
-              text: "Google",
-              isLoading: false,
+            Obx(() {
+                return LandingPageButton(
+                  backgroundColor: Colors.blue.shade600,
+                  onClick: () {
+                    screenController.googleSignIn();
+                    // Get.toNamed(RouteList.homeScreen);
+                  },
+                  svgPath: "assets/images/google.svg",
+                  text: "Google",
+                  isLoading: screenController.googleButtonLoading.value,
+                );
+              }
             ),
             10.sBH,
             LandingPageButton(
@@ -46,7 +51,7 @@ class LandingScreen extends StatelessWidget {
                 ],
               ),
               onClick: () {
-                Get.toNamed(RouteList.homeScreen);
+                Get.bottomSheet(const PhoneNumberVerifyBottomSheet(),isScrollControlled: true);
               },
               svgPath: "assets/images/phone.svg",
               text: "Phone",

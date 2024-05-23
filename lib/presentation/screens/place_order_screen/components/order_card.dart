@@ -62,12 +62,13 @@ class OrderCard extends StatelessWidget {
               ),
             ),
           ),
-
-          QuantityChangeButton(
-            addButton: () {},
-            removeButton: () {},
-            buttonColor: darkGreenColor,
-          ),
+          //todo
+          // QuantityChangeButton(
+          //
+          //   addButton: () {},
+          //   removeButton: () {},
+          //   buttonColor: darkGreenColor,
+          // ),
           5.sBW,
           Text(
             "$currency ${(5).toStringAsFixed(2)}",

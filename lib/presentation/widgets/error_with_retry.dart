@@ -18,13 +18,7 @@ class ErrorWithRetry extends StatelessWidget {
           Text(appError.errorMessage(), textScaleFactor: 1.0),
           IconButton(
             onPressed: retry,
-            icon: SvgPicture.asset(
-              "assets/images/restart_icon.svg",
-              colorFilter: ColorFilter.mode(
-                Theme.of(context).textTheme.bodySmall!.color!,
-                BlendMode.srcIn,
-              ),
-            ),
+            icon: const Icon(Icons.rotate_left),
           ),
         ],
       ),

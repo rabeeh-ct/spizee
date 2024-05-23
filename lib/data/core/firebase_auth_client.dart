@@ -4,9 +4,10 @@ import 'package:spizee/utils/debug_utils.dart';
 
 import '../../utils/snackbar_utils.dart';
 
-class FirebaseAuthClient{
+class FirebaseAuthClient {
+  FirebaseAuth auth = FirebaseAuth.instance;
+
   Future<User?> login({required Map<String, dynamic> params}) async {
-    FirebaseAuth auth = FirebaseAuth.instance;
     User? user;
 
     var userCred = await auth.signInWithEmailAndPassword(
@@ -18,7 +19,6 @@ class FirebaseAuthClient{
   }
 
   Future<User?> register({required Map<String, dynamic> params}) async {
-    FirebaseAuth auth = FirebaseAuth.instance;
     User? user;
 
     var userCred = await auth.createUserWithEmailAndPassword(
@@ -30,7 +30,6 @@ class FirebaseAuthClient{
   }
 
   Future<void> logout() async {
-    FirebaseAuth auth = FirebaseAuth.instance;
     User? user;
 
     var userCred = await auth.signOut();
@@ -40,21 +39,18 @@ class FirebaseAuthClient{
     return userCred;
   }
 
-
   Future<User?> signInWithGoogle() async {
     consoleLog(">>>>>>>>>2");
-    FirebaseAuth auth = FirebaseAuth.instance;
     User? user;
 
     final GoogleSignIn googleSignIn = GoogleSignIn();
 
     consoleLog(">>>>>>>>>3");
     late GoogleSignInAccount? googleSignInAccount;
-    try{
+    try {
       googleSignInAccount = await googleSignIn.signIn();
-    }catch(e){
+    } catch (e) {
       consoleLog(e);
-
     }
     // late GoogleSignInAccount? googleSignInAccount;
     // await googleSignIn.signIn();
@@ -62,7 +58,7 @@ class FirebaseAuthClient{
 
     if (googleSignInAccount != null) {
       final GoogleSignInAuthentication googleSignInAuthentication =
-      await googleSignInAccount.authentication;
+          await googleSignInAccount.authentication;
 
       final AuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleSignInAuthentication.accessToken,
@@ -70,8 +66,7 @@ class FirebaseAuthClient{
       );
 
       try {
-        final UserCredential userCredential =
-        await auth.signInWithCredential(credential);
+        final UserCredential userCredential = await auth.signInWithCredential(credential);
         user = userCredential.user;
       } on FirebaseAuthException catch (e) {
         if (e.code == 'account-exists-with-different-credential') {
@@ -88,29 +83,40 @@ class FirebaseAuthClient{
     return user;
   }
 
-  Future<User?> phoneNumberSignIn(String params) async {
-    FirebaseAuth auth = FirebaseAuth.instance;
-    await auth.signInWithPhoneNumber(params);
-    return null;
-    // User? user;
-    //
-    // await auth.verifyPhoneNumber(
-    //   phoneNumber: params,
-    //   verificationCompleted: (PhoneAuthCredential credential) async {
-    //     // ANDROID ONLY!
-    //
-    //     // Sign the user in (or link) with the auto-generated credential
-    //    final  data = await auth.signInWithCredential(credential);
-    //    user= data.user;
-    //   },
-    //   verificationFailed: (FirebaseAuthException e) {
-    //     if (e.code == 'invalid-phone-number') {
-    //       consoleLog('The provided phone number is not valid.');
-    //     }
-    //   },
-    //   codeSent: (String verificationId, int? resendToken) {},
-    //   codeAutoRetrievalTimeout: (String verificationId) {},
-    // );
-    // return user;
+  Future<String?> verifyPhoneNumber(String params) async {
+    // FirebaseAuthException? firebaseAuthException;
+    String? verificationCode;
+      await auth.verifyPhoneNumber(
+        phoneNumber: params,
+        verificationCompleted: (PhoneAuthCredential credential) async {
+          // ANDROID ONLY!
+
+          // Sign the user in (or link) with the auto-generated credential
+          // final  data = await auth.signInWithCredential(credential);
+          // user= data.user;
+        },
+        verificationFailed: (error) {
+          throw error;
+        },
+        codeSent: (String verificationId, int? resendToken) async {
+          consoleLog("verificationId >>>>>>> $verificationId");
+          verificationCode = verificationId;
+        },
+        codeAutoRetrievalTimeout: (String verificationId) {},
+      );
+      consoleLog(verificationCode);
+    return verificationCode;
+
+  }
+
+  Future<User?> phoneNumberSignIn(Map<String,dynamic> params) async{
+    try {
+      final PhoneAuthCredential cred = PhoneAuthProvider.credential(
+          verificationId: params["verification_id"], smsCode: params["sms_code"]);
+      final userCred = await auth.signInWithCredential(cred);
+      return userCred.user;
+    }on FirebaseAuthException catch(e){
+      rethrow;
+    }
   }
 }

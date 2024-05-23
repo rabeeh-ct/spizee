@@ -46,7 +46,7 @@ class DefaultButton extends StatelessWidget {
                   Container(
                     height: height,
                     decoration: BoxDecoration(
-                        color: backgroundColor,
+                        color: backgroundColor??greenColor,
                         // border: Border.fromBorderSide(BorderSide(color: borderColor!, width: 1.5))
                         gradient: backgroundColor == null ? gradient : null,
                         border: borderColor != null ? Border.all(color: borderColor!) : null,

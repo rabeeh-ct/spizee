@@ -17,7 +17,7 @@ abstract class AuthenticationRemoteDataSource {
 
   Future<User?> googleSignIn();
 
-  Future<User?> phoneNumberSignIn(String params);
+  Future<User?> phoneNumberSignIn(Map<String,dynamic> params);
 }
 
 class AuthenticationRemoteDataSourceImpl
@@ -65,7 +65,7 @@ class AuthenticationRemoteDataSourceImpl
   }
 
   @override
-  Future<User?> phoneNumberSignIn(String params) async {
+  Future<User?> phoneNumberSignIn(Map<String,dynamic> params) async {
     consoleLog(">>>>>>>>>>>");
     final response = await firebaseAuthClient.phoneNumberSignIn(params);
     return response;

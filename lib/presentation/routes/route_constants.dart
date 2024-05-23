@@ -5,5 +5,6 @@ class RouteList {
   static const String homeScreen = '/homeScreen';
   static const String landingScreen = '/landingScreen';
   static const String placeOrderScreen = '/placeOrderScreen';
+  static const String verifyOtpScreen = '/verifyOtpScreen';
 
 }

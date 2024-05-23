@@ -7,15 +7,16 @@ import '../../presentation/theme/theme.dart';
 
 class AppError {
   final AppErrorType appErrorType;
+  final String? message;
 
-  AppError(this.appErrorType);
+  AppError(this.appErrorType,[this.message]);
 
-  handleError() {
-    Get.snackbar("Unexpected Error", errorMessage(),
-        backgroundColor: primaryColor,
+  handleError({String? error,Duration? duration}) {
+    Get.snackbar("Unexpected Error", error??errorMessage(),
+        backgroundColor: errorColor,
         colorText: whiteColor,
         isDismissible: true,
-        duration: const Duration(milliseconds: 700),
+        duration: duration??const Duration(milliseconds: 700),
         animationDuration: const Duration(milliseconds: 400));
   }
 
@@ -33,6 +34,8 @@ class AppError {
         return sessionDeniedError;
       case AppErrorType.unexpected:
         return sessionDeniedError;
+      case AppErrorType.firebase:
+        return firebaseError;
     }
   }
 }
@@ -43,5 +46,6 @@ enum AppErrorType {
   databse,
   unauthorised,
   sessionDenied,
-  unexpected
+  unexpected,
+  firebase
 }

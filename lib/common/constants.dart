@@ -3,5 +3,6 @@ const String networkError = "Please check your Internet Connection";
 const String databseError = "Unexpected Error Occured in Database";
 const String unauthorisedError = "Unauthorised Exception";
 const String sessionDeniedError = "Session Denied,please login to continue";
-const String currency = "SAR";
+const String firebaseError = "Firebase Error Occurred";
+const String currency = "INR";
 // const String selectGender = ;

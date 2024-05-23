@@ -8,11 +8,11 @@ class ButtonLoadingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return const SizedBox(
       height: defaultPadding,
       width: defaultPadding,
       child: CupertinoActivityIndicator(
-        color: Theme.of(context).colorScheme.onBackground,
+        color: Colors.white,
         // strokeWidth: 2,
       ),
     );

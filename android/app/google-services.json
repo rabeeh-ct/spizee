@@ -22,6 +22,14 @@
           }
         },
         {
+          "client_id": "703622540021-elgb18gv8i9ibrdtfm1vpbhekugcs1s4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.spizee",
+            "certificate_hash": "bc306d8a755179d045c8affbbf987a67333f0fa9"
+          }
+        },
+        {
           "client_id": "703622540021-qvt1rs86vm89kgmg4spq6i4tbbtduv3i.apps.googleusercontent.com",
           "client_type": 3
         }

@@ -19,6 +19,8 @@ class ApiClient {
   }
 
   dynamic get(String path, {Map<dynamic, dynamic>? params}) async {
+
+    consoleLog("data");
     consoleLog(getPath(path));
     consoleLog(jsonEncode(params));
 
